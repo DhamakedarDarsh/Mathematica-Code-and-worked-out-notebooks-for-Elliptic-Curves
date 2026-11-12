@@ -1,0 +1,591 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23564,        581]
+NotebookOptionsPosition[     16181,        454]
+NotebookOutlinePosition[     16589,        470]
+CellTagsIndexPosition[     16546,        467]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["<<ECPack.wl", "Input",
+ CellChangeTimes->{{4.0034821939558983`*^9, 
+  4.0034822165173273`*^9}},ExpressionUUID->"4d279940-1246-41ab-b92b-\
+16ecd8b4bbbc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"ECPack loaded: \"\>", "\[InvisibleSpace]", "91", 
+   "\[InvisibleSpace]", "\<\" commands.\\n\"\>", 
+   "\[InvisibleSpace]", "\<\"Copyright (c) 2026, by B. Ananthanarayan, Darsh \
+R. Bhatt and Parastoo Taghizadeh Asl\\n\\n\"\>", 
+   "\[InvisibleSpace]", "\<\"ECPack comes with ABSOLUTELY NO WARRANTY.\"\>", 
+   "\[InvisibleSpace]", "\<\"\\nThis is free software, and you are welcome to \
+redistribute it under the terms of the GNU Public Licence. For assistance \
+consult Darsh R. Bhatt @ darshbhatt.ssa@gmail.com\\n\"\>", 
+   "\[InvisibleSpace]", "\<\"  ?ECP*  lists every command.\"\>"}],
+  SequenceForm[
+  "ECPack loaded: ", 91, " commands.\n", 
+   "Copyright (c) 2026, by B. Ananthanarayan, Darsh R. Bhatt and Parastoo \
+Taghizadeh Asl\n\n", "ECPack comes with ABSOLUTELY NO WARRANTY.", 
+   "\nThis is free software, and you are welcome to redistribute it under the \
+terms of the GNU Public Licence. For assistance consult Darsh R. Bhatt @ \
+darshbhatt.ssa@gmail.com\n", "  ?ECP*  lists every command."],
+  Editable->False]], "Output",ExpressionUUID->"49d664bf-c2b5-4084-87e2-\
+a8c278b7e180"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+   "These", " ", "examples", " ", "were", " ", "executed", " ", "using", " ", 
+    "Mathematica", " ", 
+    RowBox[{"13.2", ".", " ", "In"}], " ", "case", " ", "you", " ", "run", 
+    " ", "the", " ", "examples", " ", "using", " ", "higher", " ", "versions",
+     " ", "of", " ", "Mathematica"}], ",", " ", 
+   RowBox[{
+   "you", " ", "might", " ", "see", " ", "some", " ", "native", " ", 
+    "Mathematica", " ", "warnings", " ", "that", " ", "do", " ", "not", " ", 
+    "indicate", " ", "the", " ", "output", " ", "is", " ", 
+    RowBox[{"incorrect", "."}]}]}], "*)"}]], "Input",ExpressionUUID->\
+"a341204c-8d1e-4476-8985-db36a275d725"],
+
+Cell[CellGroupData[{
+
+Cell["McGee's Examples with ECPack", "Title",ExpressionUUID->"1099efd3-6a6a-4fb7-8163-3ff2fb7d2c4f"],
+
+Cell[CellGroupData[{
+
+Cell["Point Arithmetic Examples over F_p", "Section",ExpressionUUID->"2f9f8286-6f82-444c-b7d3-343b23704879"],
+
+Cell["\<\
+Define the curve y^2 = x^3 + 269x + 119 over F_709 and verify that it is \
+non-singular (the discriminant is nonzero mod 709).\
+\>", "Text",ExpressionUUID->"6eda1c98-e50e-4db4-a51f-c8acfdbb9f4a"],
+
+Cell["ec1 = {269, 119}; p1 = 709;", "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"643ba83c-7939-4fe3-b601-e42c8f96c633"],
+
+Cell[CellGroupData[{
+
+Cell["Mod[ECPShortDiscriminant[ec1], p1] != 0", "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"7597b4c4-53eb-4708-a45c-be85cf45ca3d"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{4.003482197802156*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"2948cbc1-c1cf-4675-a79a-d8cdf1dc186f"]
+}, Open  ]],
+
+Cell["Define two points and verify that they lie on the curve.", "Text",ExpressionUUID->"7cd59713-f330-4f1e-b267-6105f60e6226"],
+
+Cell["pntA = {2, 92}; pntB = {38, 116};", "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"a735566d-b21c-4ccb-b173-e6cd445f1607"],
+
+Cell[CellGroupData[{
+
+Cell["ECPPointQFp[#, ec1, p1] & /@ {pntA, pntB}", "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"4cfd985b-6bb3-4e39-aef1-37c411828248"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"True", ",", "True"}], "}"}]], "Output",
+ CellChangeTimes->{4.003482197867349*^9},
+ CellLabel->"Out[6]=",ExpressionUUID->"e75e4ddf-d2b2-427f-9e85-fe3c6fdec75d"]
+}, Open  ]],
+
+Cell["Determine the order of the points. McGee: {377, 29}.", "Text",ExpressionUUID->"a97e0043-6522-44f5-bc04-88bd42bde188"],
+
+Cell[CellGroupData[{
+
+Cell["ECPFindPointOrderFp[#, ec1, p1] & /@ {pntA, pntB}", "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"091a3097-d218-4c83-89c3-dcf92f094f84"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"377", ",", "29"}], "}"}]], "Output",
+ CellChangeTimes->{4.003482197977833*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"656ed76f-33f1-441b-92e6-24b74b9364bd"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ECPMultiplyFp[29, pntB, ec1, p1]", "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"16cc1436-55b2-4fc4-8c43-e5949eea93ac"],
+
+Cell[BoxData["\[Infinity]"], "Output",
+ CellChangeTimes->{4.0034821980369973`*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"a637219b-45b2-424a-91f2-1ab349fd6a42"]
+}, Open  ]],
+
+Cell["\<\
+Generate a linear combination of the two points. McGee: 5A + 3B = (429, 547).\
+\>", "Text",ExpressionUUID->"c70cfe6c-9257-41fa-8907-4407dc675b4c"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+ECPAddFp[ECPMultiplyFp[5, pntA, ec1, p1], ECPMultiplyFp[3, pntB, ec1, p1], \
+ec1, p1]\
+\>", "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"bfad22af-58c6-4950-b887-47ef3f91c053"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"429", ",", "547"}], "}"}]], "Output",
+ CellChangeTimes->{4.003482198083926*^9},
+ CellLabel->"Out[9]=",ExpressionUUID->"973259db-7af0-4e02-9e80-1a395a58c43e"]
+}, Open  ]],
+
+Cell["\<\
+Determine the j-invariant of the curve over F_709 (it is 666).\
+\>", "Text",ExpressionUUID->"9f2b5747-08b7-4d15-b3d2-42b9f8cf0bca"],
+
+Cell[CellGroupData[{
+
+Cell["ECPToShortWeierstrassFp[ec1, p1][\"jInvariant\"]", "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"f76a8beb-6dd0-465e-8d83-3764a233a879"],
+
+Cell[BoxData["666"], "Output",
+ CellChangeTimes->{4.003482198127886*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"be1b5f4f-3615-4d35-8bca-375146712d0c"]
+}, Open  ]],
+
+Cell["\<\
+Determine the group order. Hasse's theorem bounds it by p + 1 -/+ 2 Sqrt[p], \
+i.e. between 657 and 763; the actual order is 754 and the group is cyclic.\
+\>", "Text",ExpressionUUID->"5586cbbf-bbbf-4640-bebf-f5e0d667f19e"],
+
+Cell[CellGroupData[{
+
+Cell["{p1 + 1 - Floor[2 Sqrt[p1]], p1 + 1 + Floor[2 Sqrt[p1]]}", "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"1aa628fb-967f-48bb-a831-201c238a7a60"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"657", ",", "763"}], "}"}]], "Output",
+ CellChangeTimes->{4.0034821981768465`*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"8ccac66d-eeb8-47cc-9094-c2aa8e06949b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ECPSEAPointCount[ec1, p1]", "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"8debd692-b8a3-4c60-820f-32882a730291"],
+
+Cell[BoxData["754"], "Output",
+ CellChangeTimes->{4.0034821982200875`*^9},
+ CellLabel->"Out[12]=",ExpressionUUID->"ec421475-a507-4da6-be1f-ba41eb666f16"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ECPGroupFp[ec1, p1][\"Structure\"]", "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"a9813370-4665-401c-9a01-ecda1f25cd94"],
+
+Cell[BoxData["\<\"Z/754\"\>"], "Output",
+ CellChangeTimes->{4.003482198392174*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"9fb3a78f-2f69-4cf0-a233-8921f38bd218"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Bachet's Duplication Formula (over Q)", "Section",ExpressionUUID->"b5d39839-1f79-410f-b964-cc3867679c92"],
+
+Cell["\<\
+Define the curve y^2 - x^3 = -2 and the rational point (3, 5) on it.\
+\>", "Text",ExpressionUUID->"dc9fef3a-ae72-4aa9-942d-ae38225fcec4"],
+
+Cell["ec2 = {0, -2}; pntA = {3, 5};", "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"76548990-db41-472a-a68f-1380adb51df3"],
+
+Cell[CellGroupData[{
+
+Cell["ECPOnCurveQ[pntA, ec2]", "Input",
+ CellLabel->"In[15]:=",ExpressionUUID->"e40ed621-37f7-4667-864f-8eb04626fb31"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{4.0034821984432683`*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"3a9107b2-4219-4f91-b5a6-40a3e76c1807"]
+}, Open  ]],
+
+Cell["\<\
+The first three doublings of the rational point: P, 2P, 4P, 8P.\
+\>", "Text",ExpressionUUID->"6394afaa-fcf6-482a-927d-62df8364209a"],
+
+Cell[CellGroupData[{
+
+Cell["NestList[ECPMultiply[2, #, ec2] &, pntA, 3] // TableForm", "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"a3bd4ad5-9a94-4753-9d97-a456f8553fe8"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"3", "5"},
+    {
+     FractionBox["129", "100"], 
+     RowBox[{"-", 
+      FractionBox["383", "1000"]}]},
+    {
+     FractionBox["2340922881", "58675600"], 
+     FractionBox["113259286337279", "449455096000"]},
+    {
+     FractionBox["30037088724630450803382035538503505921", 
+      "3010683982898763071786842993779918400"], 
+     FractionBox["164455721751979625643914376686667695661898155872010593281", 
+      "5223934923525719974563641453744978655831227509874752000"]}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{4.0034821984782887`*^9},
+ CellLabel->
+  "Out[16]//TableForm=",ExpressionUUID->"13d55adc-ae82-48b0-965e-\
+d07f8a13ed47"]
+}, Open  ]],
+
+Cell["\<\
+Bachet's duplication formula (1621) for c = -2: x(2P) as a rational function \
+of x(P). McGee's package also gives y(2P) symbolically; ECPack only provides \
+the x-coordinate formula.\
+\>", "Text",ExpressionUUID->"13c46efa-2d41-47e8-93db-74529a74f023"],
+
+Cell[CellGroupData[{
+
+Cell["ECPBachetDuplication[x, ec2]", "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"2faa93be-d501-4759-a141-c348512a517e"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{"16", " ", "x"}], "+", 
+   SuperscriptBox["x", "4"]}], 
+  RowBox[{"4", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", "2"}], "+", 
+     SuperscriptBox["x", "3"]}], ")"}]}]]], "Output",
+ CellChangeTimes->{4.0034821985719504`*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"013c66ff-b5cf-4255-9654-b2793aacbe3d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Cryptography Example (the ElGamal method)", "Section",ExpressionUUID->"280d0812-f743-45e8-9800-d38a602b9ea4"],
+
+Cell["\<\
+Define the curve y^2 = x^3 + 78656x + 63203 over F_p with p = Prime[10001] = \
+104743 and the order of the group (104976).\
+\>", "Text",ExpressionUUID->"23b28047-f570-420d-8598-1c0f564fe96d"],
+
+Cell["p3 = Prime[10001]; ec3 = {78656, 63203};", "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"b9711bc5-245d-4051-a23c-1096c381801c"],
+
+Cell[CellGroupData[{
+
+Cell["n = ECPSEAPointCount[ec3, p3]", "Input",
+ CellLabel->"In[19]:=",ExpressionUUID->"a6b71253-97a4-4678-9726-a38e85d3bc7d"],
+
+Cell[BoxData["104976"], "Output",
+ CellChangeTimes->{4.003482199341114*^9},
+ CellLabel->"Out[19]=",ExpressionUUID->"62fa0776-ee37-4c79-9b80-73abf688d445"]
+}, Open  ]],
+
+Cell["\<\
+Generate the public key (P, B = s P). ECPack has no random-point command, so \
+P is obtained by embedding a random integer with ECPFindPointFp.\
+\>", "Text",ExpressionUUID->"b4662809-6206-485e-a378-0f9690bc10f0"],
+
+Cell["s = RandomInteger[{Floor[n/4], n - 1}];", "Input",
+ CellLabel->"In[20]:=",ExpressionUUID->"5a62d8a1-face-466f-bec9-07dd07fab0c3"],
+
+Cell["pntP = ECPFindPointFp[RandomInteger[{1, 1000}], ec3, p3];", "Input",
+ CellLabel->"In[21]:=",ExpressionUUID->"3749ae1b-909d-4759-987c-a289c605393f"],
+
+Cell["pntB = ECPMultiplyFp[s, pntP, ec3, p3];", "Input",
+ CellLabel->"In[22]:=",ExpressionUUID->"a785ce86-e4d7-4160-ae41-102632e2fded"],
+
+Cell[CellGroupData[{
+
+Cell["{s, pntP, pntB}", "Input",
+ CellLabel->"In[23]:=",ExpressionUUID->"27dae5e6-8c8a-43c3-8ede-29506cbe4b46"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"62137", ",", 
+   RowBox[{"{", 
+    RowBox[{"99600", ",", "40000"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"38896", ",", "56057"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{4.0034821994119024`*^9},
+ CellLabel->"Out[23]=",ExpressionUUID->"ea45caa7-8799-4801-a618-84b2be2b2b9d"]
+}, Open  ]],
+
+Cell["\<\
+The hidden message (McGee reads it from SecretMsg.txt) is converted to \
+character codes.\
+\>", "Text",ExpressionUUID->"cdaa517a-bfb3-4629-847a-454a0e1d366e"],
+
+Cell["\<\
+plntxt = \"Diphantus lived sometime before the third century A.D. He wrote \
+the Arithmetica, a treatise on algebra and number theory in 13 volumes, of \
+which 6 volumes have survived\";\
+\>", "Input",
+ CellLabel->"In[24]:=",ExpressionUUID->"4412fc0b-c329-4b9d-b4b4-b11746250b1d"],
+
+Cell["plncds = ToCharacterCode[plntxt];", "Input",
+ CellLabel->"In[25]:=",ExpressionUUID->"85b05a5a-b3f2-40fc-93f9-1c0199cd43b7"],
+
+Cell["\<\
+Alice encrypts each character code with the public key; ECPack's Koblitz \
+embedding uses the same padding x = 100 m + j as McGee's findECPoint[m*100].\
+\>", "Text",ExpressionUUID->"2b9d8100-a616-4b18-9fc2-2cede3d3d6ca"],
+
+Cell["\<\
+cphcds = ECPElGamalEncodeFp[#, {pntP, pntB}, ec3, p3, n] & /@ plncds;\
+\>", "Input",
+ CellLabel->"In[26]:=",ExpressionUUID->"f8397745-46aa-49c3-a405-84fd10bf2791"],
+
+Cell[CellGroupData[{
+
+Cell["Take[cphcds, 6] // Transpose", "Input",
+ CellLabel->"In[27]:=",ExpressionUUID->"a3d48d15-e244-4e61-aa52-0f50c52a187e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"43389", ",", "39104"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9449", ",", "85544"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"33135", ",", "42156"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"36089", ",", "41727"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"45693", ",", "49084"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"100798", ",", "46179"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"71846", ",", "103181"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"62994", ",", "84242"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"86649", ",", "100551"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"33965", ",", "31174"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"65273", ",", "75402"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"18968", ",", "57373"}], "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{4.0034822004598703`*^9},
+ CellLabel->"Out[27]=",ExpressionUUID->"0126e891-66b5-4297-ba03-8bb3da66e2bd"]
+}, Open  ]],
+
+Cell["Bob decodes the point pairs with the private key s.", "Text",ExpressionUUID->"5bb263dd-5509-49e8-8cd6-f38244f9f47f"],
+
+Cell["dcdcds = ECPElGamalDecodeFp[s, #, ec3, p3] & /@ cphcds;", "Input",
+ CellLabel->"In[28]:=",ExpressionUUID->"645a19e2-b41c-4af2-a424-3dd5a0733456"],
+
+Cell[CellGroupData[{
+
+Cell["Take[dcdcds, 25]", "Input",
+ CellLabel->"In[29]:=",ExpressionUUID->"9187b5cf-a5cc-49c6-a219-9b6cf86bedce"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "68", ",", "105", ",", "112", ",", "104", ",", "97", ",", "110", ",", "116",
+    ",", "117", ",", "115", ",", "32", ",", "108", ",", "105", ",", "118", 
+   ",", "101", ",", "100", ",", "32", ",", "115", ",", "111", ",", "109", ",",
+    "101", ",", "116", ",", "105", ",", "109", ",", "101", ",", "32"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{4.003482201062481*^9},
+ CellLabel->"Out[29]=",ExpressionUUID->"dca0be0d-b26e-47f6-b1d8-ad4f50d0bda5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FromCharacterCode[dcdcds]", "Input",
+ CellLabel->"In[30]:=",ExpressionUUID->"f95e4cad-0dd0-41e3-9689-f87dffd21fe0"],
+
+Cell[BoxData["\<\"Diphantus lived sometime before the third century A.D. He \
+wrote the Arithmetica, a treatise on algebra and number theory in 13 volumes, \
+of which 6 volumes have survived\"\>"], "Output",
+ CellChangeTimes->{4.003482201100664*^9},
+ CellLabel->"Out[30]=",ExpressionUUID->"56c27953-2632-4e0c-b9e0-7ed63cfe3f7c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FromCharacterCode[dcdcds] === plntxt", "Input",
+ CellLabel->"In[31]:=",ExpressionUUID->"9baf9fec-1d40-4e6f-b486-51d3fbc9aebb"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{4.0034822011407423`*^9},
+ CellLabel->"Out[31]=",ExpressionUUID->"2e2103bf-a1c7-4dae-9638-92fd1e9050e8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1099.8, 604.8},
+WindowMargins->{{20.4, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c9e76152-793f-4492-aba8-59e76de6d5fc"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 158, 3, 29, "Input",ExpressionUUID->"4d279940-1246-41ab-b92b-16ecd8b4bbbc"],
+Cell[741, 27, 1145, 19, 147, "Output",ExpressionUUID->"49d664bf-c2b5-4084-87e2-a8c278b7e180"]
+}, Open  ]],
+Cell[1901, 49, 691, 14, 48, "Input",ExpressionUUID->"a341204c-8d1e-4476-8985-db36a275d725"],
+Cell[CellGroupData[{
+Cell[2617, 67, 100, 0, 98, "Title",ExpressionUUID->"1099efd3-6a6a-4fb7-8163-3ff2fb7d2c4f"],
+Cell[CellGroupData[{
+Cell[2742, 71, 108, 0, 67, "Section",ExpressionUUID->"2f9f8286-6f82-444c-b7d3-343b23704879"],
+Cell[2853, 73, 205, 3, 35, "Text",ExpressionUUID->"6eda1c98-e50e-4db4-a51f-c8acfdbb9f4a"],
+Cell[3061, 78, 122, 1, 29, "Input",ExpressionUUID->"643ba83c-7939-4fe3-b601-e42c8f96c633"],
+Cell[CellGroupData[{
+Cell[3208, 83, 134, 1, 29, "Input",ExpressionUUID->"7597b4c4-53eb-4708-a45c-be85cf45ca3d"],
+Cell[3345, 86, 151, 2, 32, "Output",ExpressionUUID->"2948cbc1-c1cf-4675-a79a-d8cdf1dc186f"]
+}, Open  ]],
+Cell[3511, 91, 127, 0, 35, "Text",ExpressionUUID->"7cd59713-f330-4f1e-b267-6105f60e6226"],
+Cell[3641, 93, 128, 1, 29, "Input",ExpressionUUID->"a735566d-b21c-4ccb-b173-e6cd445f1607"],
+Cell[CellGroupData[{
+Cell[3794, 98, 136, 1, 29, "Input",ExpressionUUID->"4cfd985b-6bb3-4e39-aef1-37c411828248"],
+Cell[3933, 101, 199, 4, 32, "Output",ExpressionUUID->"e75e4ddf-d2b2-427f-9e85-fe3c6fdec75d"]
+}, Open  ]],
+Cell[4147, 108, 123, 0, 35, "Text",ExpressionUUID->"a97e0043-6522-44f5-bc04-88bd42bde188"],
+Cell[CellGroupData[{
+Cell[4295, 112, 144, 1, 29, "Input",ExpressionUUID->"091a3097-d218-4c83-89c3-dcf92f094f84"],
+Cell[4442, 115, 196, 4, 32, "Output",ExpressionUUID->"656ed76f-33f1-441b-92e6-24b74b9364bd"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4675, 124, 127, 1, 29, "Input",ExpressionUUID->"16cc1436-55b2-4fc4-8c43-e5949eea93ac"],
+Cell[4805, 127, 160, 2, 32, "Output",ExpressionUUID->"a637219b-45b2-424a-91f2-1ab349fd6a42"]
+}, Open  ]],
+Cell[4980, 132, 156, 2, 35, "Text",ExpressionUUID->"c70cfe6c-9257-41fa-8907-4407dc675b4c"],
+Cell[CellGroupData[{
+Cell[5161, 138, 188, 4, 29, "Input",ExpressionUUID->"bfad22af-58c6-4950-b887-47ef3f91c053"],
+Cell[5352, 144, 197, 4, 32, "Output",ExpressionUUID->"973259db-7af0-4e02-9e80-1a395a58c43e"]
+}, Open  ]],
+Cell[5564, 151, 141, 2, 35, "Text",ExpressionUUID->"9f2b5747-08b7-4d15-b3d2-42b9f8cf0bca"],
+Cell[CellGroupData[{
+Cell[5730, 157, 144, 1, 29, "Input",ExpressionUUID->"f76a8beb-6dd0-465e-8d83-3764a233a879"],
+Cell[5877, 160, 151, 2, 32, "Output",ExpressionUUID->"be1b5f4f-3615-4d35-8bca-375146712d0c"]
+}, Open  ]],
+Cell[6043, 165, 232, 3, 35, "Text",ExpressionUUID->"5586cbbf-bbbf-4640-bebf-f5e0d667f19e"],
+Cell[CellGroupData[{
+Cell[6300, 172, 152, 1, 29, "Input",ExpressionUUID->"1aa628fb-967f-48bb-a831-201c238a7a60"],
+Cell[6455, 175, 200, 4, 32, "Output",ExpressionUUID->"8ccac66d-eeb8-47cc-9094-c2aa8e06949b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6692, 184, 121, 1, 29, "Input",ExpressionUUID->"8debd692-b8a3-4c60-820f-32882a730291"],
+Cell[6816, 187, 153, 2, 32, "Output",ExpressionUUID->"ec421475-a507-4da6-be1f-ba41eb666f16"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7006, 194, 130, 1, 29, "Input",ExpressionUUID->"a9813370-4665-401c-9a01-ecda1f25cd94"],
+Cell[7139, 197, 161, 2, 32, "Output",ExpressionUUID->"9fb3a78f-2f69-4cf0-a233-8921f38bd218"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7349, 205, 111, 0, 67, "Section",ExpressionUUID->"b5d39839-1f79-410f-b964-cc3867679c92"],
+Cell[7463, 207, 147, 2, 35, "Text",ExpressionUUID->"dc9fef3a-ae72-4aa9-942d-ae38225fcec4"],
+Cell[7613, 211, 125, 1, 29, "Input",ExpressionUUID->"76548990-db41-472a-a68f-1380adb51df3"],
+Cell[CellGroupData[{
+Cell[7763, 216, 118, 1, 29, "Input",ExpressionUUID->"e40ed621-37f7-4667-864f-8eb04626fb31"],
+Cell[7884, 219, 154, 2, 32, "Output",ExpressionUUID->"3a9107b2-4219-4f91-b5a6-40a3e76c1807"]
+}, Open  ]],
+Cell[8053, 224, 142, 2, 35, "Text",ExpressionUUID->"6394afaa-fcf6-482a-927d-62df8364209a"],
+Cell[CellGroupData[{
+Cell[8220, 230, 152, 1, 29, "Input",ExpressionUUID->"a3bd4ad5-9a94-4753-9d97-a456f8553fe8"],
+Cell[8375, 233, 1017, 29, 120, "Output",ExpressionUUID->"13d55adc-ae82-48b0-965e-d07f8a13ed47"]
+}, Open  ]],
+Cell[9407, 265, 262, 4, 58, "Text",ExpressionUUID->"13c46efa-2d41-47e8-93db-74529a74f023"],
+Cell[CellGroupData[{
+Cell[9694, 273, 124, 1, 29, "Input",ExpressionUUID->"2faa93be-d501-4759-a141-c348512a517e"],
+Cell[9821, 276, 364, 11, 56, "Output",ExpressionUUID->"013c66ff-b5cf-4255-9654-b2793aacbe3d"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10234, 293, 115, 0, 67, "Section",ExpressionUUID->"280d0812-f743-45e8-9800-d38a602b9ea4"],
+Cell[10352, 295, 201, 3, 35, "Text",ExpressionUUID->"23b28047-f570-420d-8598-1c0f564fe96d"],
+Cell[10556, 300, 136, 1, 29, "Input",ExpressionUUID->"b9711bc5-245d-4051-a23c-1096c381801c"],
+Cell[CellGroupData[{
+Cell[10717, 305, 125, 1, 29, "Input",ExpressionUUID->"a6b71253-97a4-4678-9726-a38e85d3bc7d"],
+Cell[10845, 308, 154, 2, 32, "Output",ExpressionUUID->"62fa0776-ee37-4c79-9b80-73abf688d445"]
+}, Open  ]],
+Cell[11014, 313, 222, 3, 35, "Text",ExpressionUUID->"b4662809-6206-485e-a378-0f9690bc10f0"],
+Cell[11239, 318, 135, 1, 29, "Input",ExpressionUUID->"5a62d8a1-face-466f-bec9-07dd07fab0c3"],
+Cell[11377, 321, 153, 1, 29, "Input",ExpressionUUID->"3749ae1b-909d-4759-987c-a289c605393f"],
+Cell[11533, 324, 135, 1, 29, "Input",ExpressionUUID->"a785ce86-e4d7-4160-ae41-102632e2fded"],
+Cell[CellGroupData[{
+Cell[11693, 329, 111, 1, 29, "Input",ExpressionUUID->"27dae5e6-8c8a-43c3-8ede-29506cbe4b46"],
+Cell[11807, 332, 324, 8, 32, "Output",ExpressionUUID->"ea45caa7-8799-4801-a618-84b2be2b2b9d"]
+}, Open  ]],
+Cell[12146, 343, 168, 3, 35, "Text",ExpressionUUID->"cdaa517a-bfb3-4629-847a-454a0e1d366e"],
+Cell[12317, 348, 290, 5, 29, "Input",ExpressionUUID->"4412fc0b-c329-4b9d-b4b4-b11746250b1d"],
+Cell[12610, 355, 129, 1, 29, "Input",ExpressionUUID->"85b05a5a-b3f2-40fc-93f9-1c0199cd43b7"],
+Cell[12742, 358, 230, 3, 35, "Text",ExpressionUUID->"2b9d8100-a616-4b18-9fc2-2cede3d3d6ca"],
+Cell[12975, 363, 173, 3, 29, "Input",ExpressionUUID->"f8397745-46aa-49c3-a405-84fd10bf2791"],
+Cell[CellGroupData[{
+Cell[13173, 370, 124, 1, 29, "Input",ExpressionUUID->"a3d48d15-e244-4e61-aa52-0f50c52a187e"],
+Cell[13300, 373, 1108, 32, 52, "Output",ExpressionUUID->"0126e891-66b5-4297-ba03-8bb3da66e2bd"]
+}, Open  ]],
+Cell[14423, 408, 122, 0, 35, "Text",ExpressionUUID->"5bb263dd-5509-49e8-8cd6-f38244f9f47f"],
+Cell[14548, 410, 151, 1, 29, "Input",ExpressionUUID->"645a19e2-b41c-4af2-a424-3dd5a0733456"],
+Cell[CellGroupData[{
+Cell[14724, 415, 112, 1, 29, "Input",ExpressionUUID->"9187b5cf-a5cc-49c6-a219-9b6cf86bedce"],
+Cell[14839, 418, 487, 9, 32, "Output",ExpressionUUID->"dca0be0d-b26e-47f6-b1d8-ad4f50d0bda5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15363, 432, 121, 1, 29, "Input",ExpressionUUID->"f95e4cad-0dd0-41e3-9689-f87dffd21fe0"],
+Cell[15487, 435, 328, 4, 52, "Output",ExpressionUUID->"56c27953-2632-4e0c-b9e0-7ed63cfe3f7c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15852, 444, 132, 1, 29, "Input",ExpressionUUID->"9baf9fec-1d40-4e6f-b486-51d3fbc9aebb"],
+Cell[15987, 447, 154, 2, 55, "Output",ExpressionUUID->"2e2103bf-a1c7-4dae-9638-92fd1e9050e8"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

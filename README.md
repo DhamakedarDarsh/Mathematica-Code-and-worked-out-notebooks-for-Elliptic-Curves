@@ -1,2 +1,3 @@
-# Mathematica-Code-and-worked-out-notebooks-for-Elliptic-Curves
-This repository has the mathematica code for Elliptic Curves over rational and finite fields. Notebooks containing example from books of Lozano, Husemoller, Washington, Silverman, Weinzierl and some miscallaneous type are also included.
+# ECPack.wl: A Mathematica Package for Elliptic Curves over the Rationals and Finite Fields
+
+This repository has the Mathematica code for Elliptic Curves over rational and finite fields. It also includes notebooks with examples from books by Lozano, Husemoller, Washington, Silverman, and Weinzierl, as well as miscellaneous examples.
